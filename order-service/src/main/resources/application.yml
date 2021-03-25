@@ -1,0 +1,12 @@
+spring:
+   datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/order_db
+    username: postgres
+    password: postgres
+
+flyway:
+   url: jdbc:postgresql://localhost:5432/order_db
+   schemas: public
+   user: "postgres"
+   password: "postgres"

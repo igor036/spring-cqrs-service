@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="createSaleOrder">
+        INSERT INTO SALE_ORDER (ID, BUYER_NAME) 
+        VALUES (?, ?);
+    </entry>
+
+    <entry key="createSaleOrderPackage">
+        INSERT INTO ORDER_PACKAGE (SALE_ORDER_ID, ID, PRODUCT_GTIN, AMOUNT) 
+        VALUES (?, ?, ?, ?);
+    </entry>
+
+</properties>
