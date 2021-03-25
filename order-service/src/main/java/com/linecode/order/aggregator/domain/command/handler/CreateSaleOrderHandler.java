@@ -8,8 +8,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 @PropertySource("classpath:com/linecode/order/aggregator/domain/command/handler/CreateSaleOrderHandler.xml")
 public class CreateSaleOrderHandler implements CommandHandler<CreateSaleOrderCommand> {
 
