@@ -15,7 +15,6 @@ public class CommandGateway {
     @Autowired
     private List<CommandHandler> handlers;
     
-    
     public void handler(Command command) {
         var commandHandler = getCommandHandler(command);
         commandHandler.run(command);

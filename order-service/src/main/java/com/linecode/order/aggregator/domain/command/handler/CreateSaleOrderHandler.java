@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Transactional
+//@Transactional
 @PropertySource("classpath:com/linecode/order/aggregator/domain/command/handler/CreateSaleOrderHandler.xml")
 public class CreateSaleOrderHandler implements CommandHandler<CreateSaleOrderCommand> {
 

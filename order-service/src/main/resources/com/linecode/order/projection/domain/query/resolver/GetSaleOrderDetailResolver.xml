@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <entry key="getSaleOrderDetail">
+        SELECT 
+
+            SO.ID AS SALE_ORDER_ID,
+            SO.STATUS AS SALE_ORDER_STATUS,
+            TO_CHAR(SO.CREATED_ON, 'DD/MM/YYYY HH:MM:SS') AS SALE_ORDER_CREATED_AT,
+            SO.BUYER_NAME AS BUYER_NAME,
+            
+            OP.ID AS ODER_PACKAGE_ID,
+            OP.STATUS AS ODER_PACKAGE_STATUS,
+            TO_CHAR(OP.CREATED_ON, 'DD/MM/YYYY HH:MM:SS') AS ORDER_PACKAGE_CREATED_AT,
+            OP.PRODUCT_GTIN AS PRODUCT_GTIN,
+            OP.AMOUNT AS AMOUNT
+            
+        FROM SALE_ORDER SO
+            JOIN ORDER_PACKAGE OP ON
+                SO.ID = SALE_ORDER_ID
+        WHERE SO.ID = ?
+    </entry>
+
+</properties>
