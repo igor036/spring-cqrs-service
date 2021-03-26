@@ -15,6 +15,9 @@ public class SaleOrderDetailMapper implements ResultSetExtractor<SaleOrderDetail
 
     @Override
     public SaleOrderDetailDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+        if (rs.next()) {
+            return extractSaleOrderDetai(rs);
+        }
         return null;
     }
     
@@ -24,6 +27,7 @@ public class SaleOrderDetailMapper implements ResultSetExtractor<SaleOrderDetail
             .status(rs.getString("SALE_ORDER_STATUS"))
             .createdAt(rs.getString("SALE_ORDER_CREATED_AT"))
             .buyerName(rs.getString("BUYER_NAME"))
+            .packages(extractSaleOrderPackageList(rs))
             .build();
     }
 
