@@ -5,6 +5,7 @@ import java.util.List;
 import com.linecode.order.aggregator.domain.command.Command;
 import com.linecode.order.aggregator.domain.command.handler.CommandHandler;
 
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class CommandGateway {
     }
 
     private boolean isBeanName(CommandHandler handler, String beanName) {
-        return handler.getClass().getSimpleName().equals(beanName);
+        return AopUtils.getTargetClass(handler).getSimpleName().equals(beanName);
     }
 
     private IllegalArgumentException commandHandlerNotFoundException(Command command) {
