@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.linecode.order.projection.domain.query.GetSaleOrderDetailQuery;
 import com.linecode.order.projection.domain.query.dto.SaleOrderDetailDto;
 import com.linecode.order.projection.domain.query.mapper.SaleOrderDetailMapper;
+import com.linecode.order.shared.exception.ResourceNotFound;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ public class GetSaleOrderDetailResolver implements QueryResolver <GetSaleOrderDe
     private Environment env;
 
     @Override
-    public Optional<SaleOrderDetailDto> resolve(GetSaleOrderDetailQuery query) {
+    public SaleOrderDetailDto resolve(GetSaleOrderDetailQuery query) {
         var saleOrderDetail = getSaleOrderDetail(query);
-        if (saleOrderDetail == null) {
-            return Optional.empty();
+        if (saleOrderDetail != null) {
+            return saleOrderDetail;
         }
-        return Optional.of(saleOrderDetail);
+        throw new ResourceNotFound();
     }
 
     private SaleOrderDetailDto getSaleOrderDetail(GetSaleOrderDetailQuery query) {

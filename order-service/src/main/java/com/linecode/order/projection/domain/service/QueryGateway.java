@@ -1,7 +1,6 @@
 package com.linecode.order.projection.domain.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.linecode.order.projection.domain.query.Query;
 import com.linecode.order.projection.domain.query.resolver.QueryResolver;
@@ -16,9 +15,9 @@ public class QueryGateway {
     @Autowired
     private List<QueryResolver> resolvers;
 
-    public <R> Optional<R> resolve(Query query) {
+    public <R> R resolve(Query query) {
         var queryResolver = getQueryResolver(query);
-        return queryResolver.resolve(query);
+        return (R) queryResolver.resolve(query);
     }
 
     private QueryResolver getQueryResolver(Query query) {

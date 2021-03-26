@@ -3,6 +3,7 @@ package com.linecode.order.projection.addapter;
 import com.linecode.order.projection.domain.query.GetSaleOrderDetailQuery;
 import com.linecode.order.projection.domain.query.dto.SaleOrderDetailDto;
 import com.linecode.order.projection.domain.service.QueryGateway;
+import com.linecode.order.shared.exception.OrderException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,15 +21,13 @@ public class ShopOrderQueryController {
     private QueryGateway queryGateway;
 
     @GetMapping("{id}")
-    public ResponseEntity<SaleOrderDetailDto> getSaleOrderDetail(@PathVariable String id) {
-
-        var getSaleOrderDetailQuery = new GetSaleOrderDetailQuery(id);
-        var saleOrderDetail = queryGateway.<SaleOrderDetailDto>resolve(getSaleOrderDetailQuery);
-
-        if (saleOrderDetail.isPresent()) {
-            return ResponseEntity.status(HttpStatus.FOUND).body(saleOrderDetail.get());
+    public ResponseEntity<?> getSaleOrderDetail(@PathVariable String id) {
+        try {
+            var getSaleOrderDetailQuery = new GetSaleOrderDetailQuery(id);
+            var saleOrderDetail = queryGateway.<SaleOrderDetailDto>resolve(getSaleOrderDetailQuery);
+            return ResponseEntity.status(HttpStatus.FOUND).body(saleOrderDetail);
+        } catch(OrderException ex) {
+            return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
         }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
