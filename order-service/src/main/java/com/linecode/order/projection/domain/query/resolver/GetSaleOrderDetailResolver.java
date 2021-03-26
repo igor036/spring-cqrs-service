@@ -1,7 +1,5 @@
 package com.linecode.order.projection.domain.query.resolver;
 
-import java.util.Optional;
-
 import com.linecode.order.projection.domain.query.GetSaleOrderDetailQuery;
 import com.linecode.order.projection.domain.query.dto.SaleOrderDetailDto;
 import com.linecode.order.projection.domain.query.mapper.SaleOrderDetailMapper;
